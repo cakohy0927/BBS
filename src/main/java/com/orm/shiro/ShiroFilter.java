@@ -27,21 +27,22 @@ public class ShiroFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		try {
 			InitEnvironment environment = InitEnvironment.getInitEnvironmentInstance();
-			System.out.println(environment);
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			HttpSession session = httpRequest.getSession(true);
 			String url = httpRequest.getRequestURL().toString();
-			if (url.contains(environment.getIgnoreResources()) || url.contains(environment.getOutsideOfficeHoursPage())) {
-				chain.doFilter(request, response);
-			} else {
-				Object object = session.getAttribute("user");
-				if (object != null) {
-					chain.doFilter(request, response);
-				} else {
-					httpResponse.sendRedirect(environment.getOutsideOfficeHoursPage());
-				}
-			}
+//			if (url.contains(environment.getIgnoreResources()) || url.contains(environment.getOutsideOfficeHoursPage())) {
+//				chain.doFilter(request, response);
+//			} else {
+//				Object object = session.getAttribute("user");
+//				if (object != null) {
+//					chain.doFilter(request, response);
+//				} else {
+//					httpResponse.sendRedirect(environment.getOutsideOfficeHoursPage());
+//				}
+//			}
+
+			chain.doFilter(request, response);
 		} catch (BeansException e) {
 			e.printStackTrace();
 		}
