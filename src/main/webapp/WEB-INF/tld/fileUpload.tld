@@ -8,18 +8,12 @@
     <uri>http://file-upload.upload</uri>
     <tag>
         <name>upload</name>
-        <tag-class>com.cako.tag.FileUploadTag</tag-class>
+        <tag-class>com.orm.commons.tag.FileUploadTag</tag-class>
         <body-content>empty</body-content>
-        <!-- <attribute>
-            <description>当前页</description>
-            <name>moduelId</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute> -->
-    </tag>
-    <tag>
-        <name>activiti</name>
-        <tag-class>com.cako.tag.ActivitiTag</tag-class>
-        <body-content>empty</body-content>
+        <attribute>
+        	<name>moduleName</name>
+        	<required>true</required>
+        	<rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
 </taglib>

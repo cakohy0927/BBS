@@ -1,4 +1,4 @@
-package com.orm.commons.utils;
+package com.cako.platform.utils;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -7,16 +7,61 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-public class PageTag extends TagSupport {
+public class CurtainPage extends TagSupport {
 	private static final long serialVersionUID = -7605746852222593994L;
 	private int currentPage;// 当前页
-	private String formId;
 	private int pagesize; // 页大小
 	private int totalLines; // 总记录条数
-	private String url; // 链接地址
+	private Pager pageInfo;
+	private String formId;
+
+	
+	public Pager getPageInfo() {
+		return pageInfo;
+	}
+
+	public void setPageInfo(Pager pageInfo) {
+		this.pageInfo = pageInfo;
+	}
+
+	public String getFormId() {
+		return formId;
+	}
+
+	public void setFormId(String formId) {
+		this.formId = formId;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(int pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	public int getTotalLines() {
+		return totalLines;
+	}
+
+	public void setTotalLines(int totalLines) {
+		this.totalLines = totalLines;
+	}
 
 	@Override
 	public int doStartTag() throws JspException {
+		if (pageInfo != null) {
+			pagesize = pageInfo.getPageSize();
+			totalLines = pageInfo.getTotlaRecord();
+		}
 		// 计算总页数
 		int pageCount = totalLines % pagesize == 0 ? totalLines / pagesize : totalLines / pagesize + 1;
 		// 拼写要输出到页面的HTML文本
@@ -40,9 +85,6 @@ public class PageTag extends TagSupport {
 			if (currentPage < 1) {
 				currentPage = 1;
 			}
-
-			sb.append("<form method=\"post\" action=\"").append(this.url).append("\" name=\"qPagerForm\">\r\n");
-
 			// 获取请求中的所有参数
 			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 			Enumeration<String> enumeration = request.getParameterNames();
@@ -114,16 +156,14 @@ public class PageTag extends TagSupport {
 			} else {
 				sb.append("<a href=\"javascript:turnOverPage(").append((currentPage + 1)).append(")\">下一页&nbsp;&raquo;</a>\r\n");
 			}
-			sb.append("</form>\r\n");
-
 			// 生成提交表单的JS
 			sb.append("<script language=\"javascript\">\r\n");
 			sb.append("  function turnOverPage(no){\r\n");
 			sb.append("    if(no>").append(pageCount).append("){");
 			sb.append("      no=").append(pageCount).append(";}\r\n");
 			sb.append("    if(no<1){no=1;}\r\n");
-			sb.append("    document.qPagerForm.currentPage.value=no;\r\n");
-			sb.append("    document.qPagerForm.submit();\r\n");
+			sb.append("    document." +this.formId + ".currentPage.value=no;\r\n");
+			sb.append("    document." +this.formId + ".submit();\r\n");
 			sb.append("  }\r\n");
 			sb.append("</script>\r\n");
 		}
@@ -136,45 +176,5 @@ public class PageTag extends TagSupport {
 			throw new JspException(e);
 		}
 		return SKIP_BODY;
-	}
-
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public String getFormId() {
-		return formId;
-	}
-
-	public int getPagesize() {
-		return pagesize;
-	}
-
-	public int getTotalLines() {
-		return totalLines;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	public void setFormId(String formId) {
-		this.formId = formId;
-	}
-
-	public void setPagesize(int pagesize) {
-		this.pagesize = pagesize;
-	}
-
-	public void setTotalLines(int totalLines) {
-		this.totalLines = totalLines;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 }

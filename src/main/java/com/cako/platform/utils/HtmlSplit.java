@@ -1,4 +1,4 @@
-package com.orm.commons.utils;
+package com.cako.platform.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

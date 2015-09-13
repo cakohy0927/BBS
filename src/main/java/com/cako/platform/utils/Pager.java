@@ -1,4 +1,4 @@
-package com.orm.commons.utils;
+package com.cako.platform.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -9,6 +9,14 @@ public class Pager {
 	private int currentPage;// 当前页数
 	private int pageSize = 10;
 
+	public Pager(String currentPage) {
+		int currentpage = 1;
+		if (StringUtils.isNotEmpty(currentPage)) {
+			currentpage = Integer.parseInt(currentPage);
+		}
+		this.currentPage = currentpage;
+	}
+
 	public Pager(long totalRecord, String currentPage) {
 		this.totlaRecord = (int) totalRecord;
 		int currentpage = 1;
@@ -16,7 +24,20 @@ public class Pager {
 			currentpage = Integer.parseInt(currentPage);
 		}
 		this.currentPage = currentpage;
-		int totalPage = (int)totlaRecord / this.pageSize;
+		int totalPage = (int) totlaRecord / this.pageSize;
+		if (totlaRecord % this.pageSize != 0)
+			totalPage += 1;
+		this.totalPage = totalPage;
+	}
+
+	public Pager(int totalRecord, int currentPage) {
+		this.totlaRecord = (int) totalRecord;
+		int currentpage = 1;
+		if (StringUtils.isNotEmpty(String.valueOf(currentPage))) {
+			currentpage = Integer.parseInt(String.valueOf(currentPage));
+		}
+		this.currentPage = currentpage;
+		int totalPage = (int) totlaRecord / this.pageSize;
 		if (totlaRecord % this.pageSize != 0)
 			totalPage += 1;
 		this.totalPage = totalPage;

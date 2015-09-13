@@ -44,9 +44,13 @@
                         }
                     },
                     callback:function(data){
-                        console.log("callback:" + data);
-                        console.log(data);
-                    }
+                   	  	console.log(data);
+            			if(data.status=="y"){
+            				setTimeout(function(){
+            					$.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
+            				},2000);
+            			}
+            		}
                 }
             });
         });

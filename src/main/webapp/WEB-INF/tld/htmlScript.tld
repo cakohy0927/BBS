@@ -11,7 +11,7 @@
     
     <tag>
         <name>subString</name>
-        <tag-class>com.cako.basic.util.HTMLSpirit</tag-class>
+        <tag-class>com.orm.commons.tagSupport.HTMLSpirit</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <description>要截取的字符串</description>
