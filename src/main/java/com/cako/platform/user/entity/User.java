@@ -1,7 +1,5 @@
 package com.cako.platform.user.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -14,7 +12,7 @@ import com.orm.enums.SysEnum.UserType;
 @Table(name = "t_platform_user")
 public class User extends BaseEntity {
 
-	private Date brithday;// 出生日期
+	private String brithday;// 出生日期
 	private String email;// 电子邮箱
 	private String loginName;// 登录名称
 	private String nickName;// 用户昵称
@@ -22,7 +20,7 @@ public class User extends BaseEntity {
 	private SysEnum.Status userStatus = Status.INIT;// 用户状态
 	private SysEnum.UserType userType = UserType.GENERAL;// 用户类型
 
-	public Date getBrithday() {
+	public String getBrithday() {
 		return brithday;
 	}
 
@@ -50,7 +48,7 @@ public class User extends BaseEntity {
 		return userType;
 	}
 
-	public void setBrithday(Date brithday) {
+	public void setBrithday(String brithday) {
 		this.brithday = brithday;
 	}
 
