@@ -1,4 +1,4 @@
-package com.cako.platform.utils;
+package com.orm.commons.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

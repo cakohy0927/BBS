@@ -1,4 +1,4 @@
-package com.cako.platform.utils;
+package com.orm.commons.utils;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -10,51 +10,10 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class CurtainPage extends TagSupport {
 	private static final long serialVersionUID = -7605746852222593994L;
 	private int currentPage;// 当前页
+	private String formId;
+	private Pager pageInfo;
 	private int pagesize; // 页大小
 	private int totalLines; // 总记录条数
-	private Pager pageInfo;
-	private String formId;
-
-	
-	public Pager getPageInfo() {
-		return pageInfo;
-	}
-
-	public void setPageInfo(Pager pageInfo) {
-		this.pageInfo = pageInfo;
-	}
-
-	public String getFormId() {
-		return formId;
-	}
-
-	public void setFormId(String formId) {
-		this.formId = formId;
-	}
-
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	public int getPagesize() {
-		return pagesize;
-	}
-
-	public void setPagesize(int pagesize) {
-		this.pagesize = pagesize;
-	}
-
-	public int getTotalLines() {
-		return totalLines;
-	}
-
-	public void setTotalLines(int totalLines) {
-		this.totalLines = totalLines;
-	}
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -162,8 +121,8 @@ public class CurtainPage extends TagSupport {
 			sb.append("    if(no>").append(pageCount).append("){");
 			sb.append("      no=").append(pageCount).append(";}\r\n");
 			sb.append("    if(no<1){no=1;}\r\n");
-			sb.append("    document." +this.formId + ".currentPage.value=no;\r\n");
-			sb.append("    document." +this.formId + ".submit();\r\n");
+			sb.append("    document." + this.formId + ".currentPage.value=no;\r\n");
+			sb.append("    document." + this.formId + ".submit();\r\n");
 			sb.append("  }\r\n");
 			sb.append("</script>\r\n");
 		}
@@ -176,5 +135,45 @@ public class CurtainPage extends TagSupport {
 			throw new JspException(e);
 		}
 		return SKIP_BODY;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public String getFormId() {
+		return formId;
+	}
+
+	public Pager getPageInfo() {
+		return pageInfo;
+	}
+
+	public int getPagesize() {
+		return pagesize;
+	}
+
+	public int getTotalLines() {
+		return totalLines;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public void setFormId(String formId) {
+		this.formId = formId;
+	}
+
+	public void setPageInfo(Pager pageInfo) {
+		this.pageInfo = pageInfo;
+	}
+
+	public void setPagesize(int pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	public void setTotalLines(int totalLines) {
+		this.totalLines = totalLines;
 	}
 }

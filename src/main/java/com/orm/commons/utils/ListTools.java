@@ -1,4 +1,4 @@
-package com.cako.platform.utils;
+package com.orm.commons.utils;
 
 import java.util.ArrayList;
 import java.util.List;

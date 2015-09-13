@@ -1,4 +1,4 @@
-package com.cako.platform.utils;
+package com.orm.commons.utils;
 
 import java.util.Enumeration;
 import java.util.HashMap;
