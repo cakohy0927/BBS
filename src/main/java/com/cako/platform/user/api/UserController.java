@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cako.platform.user.entity.User;
-import com.cako.platform.user.entity.UserClazz;
 import com.cako.platform.user.service.UserService;
+import com.cako.platform.user.tree.UserClazz;
 import com.cako.platform.utils.BeanToMapUtil;
 import com.orm.commons.encryption.MD5Encryption;
 import com.orm.commons.exception.ServiceException;

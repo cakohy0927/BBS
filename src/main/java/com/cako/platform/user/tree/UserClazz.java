@@ -1,7 +1,8 @@
-package com.cako.platform.user.entity;
+package com.cako.platform.user.tree;
 
 import java.util.Date;
 
+import com.cako.platform.user.entity.User;
 import com.orm.enums.SysEnum.DeleteStatus;
 import com.orm.enums.SysEnum.Display;
 import com.orm.enums.SysEnum.Status;
