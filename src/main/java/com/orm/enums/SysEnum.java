@@ -1,5 +1,7 @@
 package com.orm.enums;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class SysEnum {
 
 	/**
@@ -16,6 +18,17 @@ public class SysEnum {
 		NOTE;
 	}
 
+	public static ColumnType getColumnType(String columnType){
+		ColumnType type = null;
+		if (StringUtils.equals(columnType,"CMS")){
+			type = ColumnType.CMS;
+		}else if (StringUtils.equals(columnType,"COMMON")){
+			type = ColumnType.COMMON;
+		}else if (StringUtils.equals(columnType,"NOTE")){
+			type = ColumnType.NOTE;
+		}
+		return type;
+	}
 	/**
 	 * @描述：删除状态
 	 * @author HUANGYUAN

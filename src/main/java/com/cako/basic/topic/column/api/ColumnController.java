@@ -78,6 +78,8 @@ public class ColumnController {
 	public String columnSave(HttpServletRequest request, Model model, Column column, HttpServletResponse response) {
 		try {
 			String parentColumnId = request.getParameter("parentColumnId");
+			String columnType = request.getParameter("columnType");
+			column.setColumnType(SysEnum.getColumnType(columnType));
 			if (StringUtils.isNotEmpty(parentColumnId)) {
 				Column column2 = columnService.get(parentColumnId);
 				column.setColumn(column2);

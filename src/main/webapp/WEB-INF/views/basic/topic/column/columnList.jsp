@@ -43,7 +43,7 @@
                 </div>
                 <div class="operate-toolbar">
                     <a class="btn btn-info btn-sm" href="javascript:void(0)">查询</a>
-                    <a class="btn btn-primary btn-sm" href="javascript:void(0)">添加</a>
+                    <a class="btn btn-primary btn-sm" href="${ctx}/basic/topic/column/columnCreate">添加</a>
                 </div>
             </div>
             <div class="row">

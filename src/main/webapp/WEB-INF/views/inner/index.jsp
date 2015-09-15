@@ -15,6 +15,10 @@
 		var h = window.innerHeight;
 		$("#main_frame").height(h - 60);
 	});
+	$(window).resize(function() {
+		var h = window.innerHeight;
+		$("#main_frame").height(h - 60);
+	});
 </script>
 </head>
 <body>
