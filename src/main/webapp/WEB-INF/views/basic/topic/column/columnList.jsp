@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <curtain:include href="base/bootstap.jsp" />
+<link type="text/css" rel="stylesheet" href="${ctx}/static/project/css/index.css">
 <script type="text/javascript">
 	function deleteInfo(id,departId){
 		//${ctx}/platform/depart/delete
@@ -32,61 +33,73 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="row">
-			<form action="" method="get" name="queryForm" id="queryForm">
-				<table class="table table-striped table-bordered table-hover table-condensed">
-					<thead>
-						<tr>
-							<td>栏目编号</td>
-							<td>栏目名称</td>
-							<td>上级栏目编号</td>
-							<td>上级栏目名称</td>
-							<td>栏目状态</td>
-							<td>是否显示</td>
-							<td style="text-align: center;">操作</td>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="column" items="${list}">
-							<tr>
-								<td>${column.number}</td>
-								<td>${column.name}</td>
-								<td>
-									${column.column.number}
-								</td>
-								<td>
-									${column.column.name}
-								</td>
-								<td>
-									<c:choose>
-										<c:when test="${column.columnType=='CMS'}">CMS模块</c:when>
-										<c:when test="${column.columnType=='NOTE'}">BBS模块</c:when>
-										<c:when test="${column.columnType=='COMMON'}">公共模块</c:when>
-									</c:choose>
-								</td>
-								<td>
-									<c:choose>
-										<c:when test="${column.displayStatus == 'DISPLAY'}">显示</c:when>
-										<c:when test="${column.displayStatus == 'NONE'}">不显示</c:when>
-									</c:choose>
-								</td>
-								<td style="text-align: center;width:100px;">
-									<a href="${ctx}/platform/user/userEdit/${user.id}">修改</a>
-									<a href="javascript:void(0)" onclick="deleteInfo('${entity.id}','${depart.id}')">删除</a>
-								</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="7" style="text-align: right;">
-								<page:pageInfo pageInfo="${pager}" formId="queryForm" currentPage="${currentPage}"/>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
-			</form>
-		</div>
+        <form action="" method="get" name="queryForm" id="queryForm">
+            <div class="row btn-operate" style="">
+                <div class="form-group query-toolbar">
+                    <span>栏目名称</span>
+                    <span>
+                        <input type="text" class="query-input">
+                    </span>
+                </div>
+                <div class="operate-toolbar">
+                    <a class="btn btn-info btn-sm" href="javascript:void(0)">查询</a>
+                    <a class="btn btn-primary btn-sm" href="javascript:void(0)">添加</a>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-striped table-bordered table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <td>栏目编号</td>
+                            <td>栏目名称</td>
+                            <td>上级栏目编号</td>
+                            <td>上级栏目名称</td>
+                            <td>栏目状态</td>
+                            <td>是否显示</td>
+                            <td style="text-align: center;">操作</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="column" items="${list}">
+                            <tr>
+                                <td>${column.number}</td>
+                                <td>${column.name}</td>
+                                <td>
+                                    ${column.column.number}
+                                </td>
+                                <td>
+                                    ${column.column.name}
+                                </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${column.columnType=='CMS'}">CMS模块</c:when>
+                                        <c:when test="${column.columnType=='NOTE'}">BBS模块</c:when>
+                                        <c:when test="${column.columnType=='COMMON'}">公共模块</c:when>
+                                    </c:choose>
+                                </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${column.displayStatus == 'DISPLAY'}">显示</c:when>
+                                        <c:when test="${column.displayStatus == 'NONE'}">不显示</c:when>
+                                    </c:choose>
+                                </td>
+                                <td style="text-align: center;width:100px;">
+                                    <a href="${ctx}/platform/user/userEdit/${user.id}">修改</a>
+                                    <a href="javascript:void(0)" onclick="deleteInfo('${entity.id}','${depart.id}')">删除</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7" style="text-align: right;">
+                                <page:pageInfo pageInfo="${pager}" formId="queryForm" currentPage="${currentPage}"/>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </form>
 	</div>
 </body>
 </html>

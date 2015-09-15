@@ -54,7 +54,7 @@
 				</ul>
 			</div>
 			<div class="col-md-10" style="padding-left: 0px;padding-right: 1px;border-left: 2px solid #f2f2f2;">
-				<iframe id="main_frame" name="main_frame" frameborder="0" src="http://www.baidu.com" width="100%" height="100%"/>
+				<iframe id="main_frame" name="main_frame" frameborder="0" src="${ctx}/basic/topic/column/columnList" width="100%" height="100%"/>
 			</div>
 		</div>
 	</div>

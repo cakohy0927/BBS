@@ -136,13 +136,13 @@
 				<ul id="sddm">
 					<li>
 						<a href="#" onmouseover="mopen('m1')" onmouseout="mclosetime()">首页</a>
-						<div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
-							<a href="#">HTML DropDown</a>
-							<a href="#">DHTML DropDown menu</a>
-							<a href="#">JavaScript DropDown</a>
-							<a href="#">DropDown Menu</a>
-							<a href="#">CSS DropDown</a>
-						</div>
+						<%--<div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">--%>
+							<%--<a href="#">HTML DropDown</a>--%>
+							<%--<a href="#">DHTML DropDown menu</a>--%>
+							<%--<a href="#">JavaScript DropDown</a>--%>
+							<%--<a href="#">DropDown Menu</a>--%>
+							<%--<a href="#">CSS DropDown</a>--%>
+						<%--</div>--%>
 					</li>
 					<li><a href="#" onmouseover="mopen('m2')" onmouseout="mclosetime()">开源项目</a>
 						<div id="m2" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
