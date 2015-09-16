@@ -1,0 +1,47 @@
+.menu_list {
+    width: 228px;
+}
+
+.menu_head {
+    background: #f1f1f1 url("../images/pro_left.png") no-repeat scroll right center;
+    border: 1px solid #e1e1e1;
+    color: #525252;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding-left: 10px;
+    position: relative;
+    width: 100%;
+}
+
+.menu_list .current {
+    background: #f1f1f1 url(../images/pro_down.png) center right no-repeat;
+}
+
+.menu_body {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    line-height: 38px;
+    border-left: 1px solid #e1e1e1;
+    backguound: #fff;
+}
+
+.menu_body a {
+    display: block;
+    width: 223px;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 38px;
+    color: #777777;
+    background: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.menu_body a:hover {
+    text-decoration: none;
+}
