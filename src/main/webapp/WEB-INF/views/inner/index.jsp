@@ -80,27 +80,14 @@
 			<div class="col-md-2" style="background: #f1f1f1">
 				<!-- 代码 开始 -->
 				<div id="firstpane" class="menu_list" style="overflow-y:auto;overflow-x: hidden">
-					<p class="menu_head current">哲学</p>
-					<div style="display:block" class=menu_body >
-						<a href="#">科学技术哲学</a>
-						<a href="#">宗教学</a>
-						<a href="#">美学</a>
-						<a href="#">伦理学</a>
-						<a href="#">逻辑学</a>
-						<a href="#">外国哲学</a>
-						<a href="#">中国哲学</a>
-						<a href="#">马克思主义哲学</a>
+					<p class="menu_head current">系统信息管理</p>
+					<div style="display:block;" class=menu_body >
+						<a href="${ctx}/platform/user/userList" target="main_frame">用户信息管理</a>
+						<a href="javascript:void(0)" target="main_frame">菜单信息管理</a>
 					</div>
-					<p class="menu_head">经济学</p>
-					<div style="display:none" class=menu_body >
-						<a href="#">应用经济学</a>
-						<a href="#">理论经济学</a>
-						<a href="#">国民经济学</a>
-						<a href="#">区域经济学</a>
-						<a href="#">产业经济学</a>
-						<a href="#">国际贸易学</a>
-						<a href="#">劳动经济学</a>
-						<a href="#">政治经济学</a>
+					<p class="menu_head">基础数据管理</p>
+					<div style="display:none;" class=menu_body >
+						<a href="${ctx}/basic/topic/column/columnList" target="main_frame">栏目信息管理</a>
 					</div>
 					<p class="menu_head">法学</p>
 					<div style="display:none" class=menu_body >
@@ -113,19 +100,6 @@
 					<p class="menu_head">教育学</p>
 					<div style="display:none" class=menu_body >
 						<a href="#">体育人文社会学</a>
-						<a href="#">体育教育训练学</a>
-						<a href="#">民族传统体育学</a>
-						<a href="#">发展与教育心理学</a>
-						<a href="#">应用心理学</a>
-						<a href="#">教育学原理</a>
-						<a href="#">课程与教学论</a>
-						<a href="#">比较教育学</a>
-						<a href="#">学前教育学</a>
-						<a href="#">高等教育学</a>
-						<a href="#">成人教育学</a>
-						<a href="#">职业技术教育学</a>
-						<a href="#">特殊教育学</a>
-						<a href="#">教育技术学</a>
 					</div>
 					<p class="menu_head">工学</p>
 					<div style="display:none" class=menu_body >
@@ -134,17 +108,11 @@
 						<a href="#">流体力学</a>
 						<a href="#">工程力学</a>
 						<a href="#">机械制造及其自动化</a>
-						<a href="#">机械电子工程</a>
-						<a href="#">机械设计及理论</a>
-						<a href="#">仪器科学与技术</a>
-						<a href="#">精密仪器及机械</a>
-						<a href="#">测试计量技术及仪器</a>
-						<a href="http://sc.chinaz.com/" target="_blank">站长素材</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-10" style="padding-left: 0px;padding-right: 1px;border-left: 2px solid #f2f2f2;">
-				<iframe id="main_frame" name="main_frame" frameborder="0" src="${ctx}/basic/topic/column/columnList" width="100%" height="100%"/>
+				<iframe id="main_frame" name="main_frame" frameborder="0" src="" width="100%" height="100%"/>
 			</div>
 		</div>
 	</div>

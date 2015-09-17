@@ -11,17 +11,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <curtain:include href="base/bootstap.jsp" />
+<link type="text/css" rel="stylesheet" href="${ctx}/static/project/css/index.css">
 <script type="text/javascript">
 	function deleteInfo(id,departId){
 		//${ctx}/platform/depart/delete
 		if(confirm("你确定删除？")){
 			$.get("${ctx}/platform/depart/delete/"+id,function(data){
 				data = jQuery.parseJSON(data);
-				if(data.resposeCode == '<%=MessageObject.ResposeCode.code_200%>'){
-					alert(data.inforamation);
+				if(data.resposeCode == '<%=MessageObject.ResponseCode.code_200%>'){
+					alert(data.message);
 					window.location.href = '${ctx}/platform/depart/departChildList?id='+departId;
 				} else {
-					alert(data.errorInformation);
+					alert(data.message);
 					return ;
 				}
 					
@@ -33,18 +34,20 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="row">
-			<c:if test="${not empty depart}">
-				当前所在机构：${depart.departName}
-			</c:if>
-			<span style="float:right;">
-				<a href="${ctx}/platform/user/userCreate" class="btn btn-primary btn-xs">添加</a>
-			</span>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<div class="row">
-			<form action="" method="get" name="queryForm" id="queryForm">
+		<form action="" method="get" name="queryForm" id="queryForm">
+			 <div class="row btn-operate" style="">
+	            <div class="form-group query-toolbar">
+	                <span>用户名称</span>
+	                <span>
+	                    <input type="text" class="query-input">
+	                </span>
+	            </div>
+	            <div class="operate-toolbar">
+	                <a class="btn btn-info btn-sm" href="javascript:void(0)">查询</a>
+	                <a class="btn btn-primary btn-sm" href="${ctx}/platform/user/userCreate">添加</a>
+	            </div>
+	        </div>
+			<div class="row">
 				<table class="table table-striped table-bordered table-hover table-condensed">
 					<thead>
 						<tr>
@@ -96,8 +99,8 @@
 						</tr>
 					</tfoot>
 				</table>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 </body>
 </html>

@@ -8,13 +8,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <curtain:include href="base/bootstap.jsp" />
     <script type="text/javascript" src="${ctx}/static/My97DatePicker/WdatePicker.js"></script>
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/project/css/index.css">
     <title>用户信息添加</title>
     <script type="text/javascript">
         $(document).ready(function(){
             $(".registerform").Validform({
                 tiptype:2,
                 datatype:{
-                    "*6-20": /^[^\s]{3,20}$/,
+                    "*3-20": /^[^\s]{3,20}$/,
                     "z2-4" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
                     "loginName":function(value){
                         var usern = /^[a-zA-Z0-9_]{1,}$/;
@@ -48,14 +49,14 @@
     </script>
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
         <form class="form-horizontal registerform" method="post" action="${ctx}/platform/user/userSave">
             <input type="hidden" value="${user.id}" name="id" id="id">
             <div class="form-group">
                 <label for="nickName" class="col-sm-2 control-label">用户昵称</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" value="${user.nickName}" name="nickName" id="nickName" placeholder="请输入用户昵称"
-                           datatype="s6-18" nullmsg="请输入昵称！" errormsg="昵称至少6个字符,最多18个字符！">
+                           datatype="*3-20" nullmsg="请输入昵称！" errormsg="昵称至少3个字符,最多20个字符！">
                 </div>
                 <div class="Validform_checktip"></div>
             </div>

@@ -5,13 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>栏目添加</title>
-	<curtain:include href="base/bootstap.jsp" />
-	<link type="text/css" rel="stylesheet" href="${ctx}/static/project/css/index.css">
-	<style type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>栏目添加</title>
+<curtain:include href="base/bootstap.jsp" />
+<link type="text/css" rel="stylesheet" href="${ctx}/static/project/css/index.css">
+<style type="text/css">
 
-	</style>
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#parentColumnName").click(function() {
