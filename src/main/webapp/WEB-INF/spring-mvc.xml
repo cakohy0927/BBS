@@ -17,9 +17,6 @@
 	</mvc:interceptors>
 	
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
-		<mvc:argument-resolvers>
-			<bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
-		</mvc:argument-resolvers>
 		<mvc:message-converters register-defaults="true">
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 				<constructor-arg value="UTF-8" />
