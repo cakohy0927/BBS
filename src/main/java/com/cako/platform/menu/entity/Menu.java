@@ -3,6 +3,8 @@ package com.cako.platform.menu.entity;
 import com.cako.platform.utils.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -12,31 +14,43 @@ import javax.persistence.Table;
 @Table(name = "t_platform_menu")
 public class Menu extends BaseEntity {
 
-    private String href;
-    private String name;
-    private String authority;//别名
+	private String href;
+	private String name;
+	private String authority;// 别名
 
-    public String getHref() {
-        return href;
-    }
+	private Menu menu;
 
-    public void setHref(String href) {
-        this.href = href;
-    }
+	@ManyToOne
+	@JoinColumn(name = "p_id")
+	public Menu getMenu() {
+		return menu;
+	}
+	
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+	
+	public String getHref() {
+		return href;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setHref(String href) {
+		this.href = href;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getAuthority() {
-        return authority;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
 }
