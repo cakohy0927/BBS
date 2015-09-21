@@ -84,6 +84,7 @@
 					<div style="display:block;" class=menu_body >
 						<a href="${ctx}/platform/user/userList" target="main_frame">用户信息管理</a>
 						<a href="${ctx}/platform/menu/menuList" target="main_frame">菜单信息管理</a>
+						<a href="${ctx}/platform/role/roleList" target="main_frame">角色信息管理</a>
 					</div>
 					<p class="menu_head">基础数据管理</p>
 					<div style="display:none;" class=menu_body >
