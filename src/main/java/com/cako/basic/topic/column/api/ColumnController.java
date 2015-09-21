@@ -68,6 +68,7 @@ public class ColumnController extends BaseController {
 				Column column = columnService.get(id);
 				DeleteStatus deleteStatus = DeleteStatus.YES;
 				column.setDeleteStatus(deleteStatus);
+				columnService.saveColumn(column);
 				message.setInforMessage("栏目删除成功");
 			} else {
 				message.setErrorMessage("栏目删除失败");
@@ -87,6 +88,14 @@ public class ColumnController extends BaseController {
 	@RequestMapping(value = "/column/columnEdit/{id}", method = RequestMethod.GET)
 	public String columnEdit(@PathVariable("id") String id, Model model) {
 		try {
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("deleteStatus_eq", DeleteStatus.NO);
+			List<Column> list = columnService.queryByMap(paramMap);
+			List<ColumnTree> columnTrees = new ArrayList<ColumnTree>();
+			for (Column column : list) {
+				columnTrees.add(new ColumnTree(column));
+			}
+			model.addAttribute("columnTrees", new JsonMapper().toJson(columnTrees));
 			if (StringUtils.isNotEmpty(id)) {
 				Column column = columnService.get(id);
 				model.addAttribute("column", column);

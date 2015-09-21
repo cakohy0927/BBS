@@ -15,13 +15,13 @@
 	function deleteInfo(id,departId){
 		//${ctx}/platform/depart/delete
 		if(confirm("你确定删除？")){
-			$.get("${ctx}/platform/depart/delete/"+id,function(data){
+			$.get("${ctx}/basic/topic/column/columnDelete/"+id,function(data){
 				data = jQuery.parseJSON(data);
 				if(data.resposeCode == '<%=MessageObject.ResponseCode.code_200%>'){
-					alert(data.inforamation);
-					window.location.href = '${ctx}/platform/depart/departChildList?id='+departId;
+					alert(data.message);
+					window.location.href = '${ctx}/basic/topic/column/columnList';
 				} else {
-					alert(data.errorInformation);
+					alert(data.message);
 					return ;
 				}
 					
@@ -84,8 +84,8 @@
                                     </c:choose>
                                 </td>
                                 <td style="text-align: center;width:100px;">
-                                    <a href="${ctx}/platform/user/userEdit/${user.id}">修改</a>
-                                    <a href="javascript:void(0)" onclick="deleteInfo('${entity.id}','${depart.id}')">删除</a>
+                                    <a href="${ctx}/basic/topic/column/columnEdit/${column.id}">修改</a>
+                                    <a href="javascript:void(0)" onclick="deleteInfo('${column.id}')">删除</a>
                                 </td>
                             </tr>
                         </c:forEach>
