@@ -23,6 +23,13 @@ public class MessageObject {
 
 	private Integer resposecode;
 
+	public String getJsonMapper(MessageObject message) {
+		if (message != null) {
+			return new JsonMapper().toJson(message);
+		}
+		return "";
+	}
+
 	public String getMessage() {
 		return message;
 	}
