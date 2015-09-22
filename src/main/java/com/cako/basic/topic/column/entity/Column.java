@@ -17,6 +17,7 @@ public class Column extends BaseEntity {
 	private SysEnum.ColumnType columnType = ColumnType.NOTE;// 栏目类型
 	private String name;// 栏目名称
 	private String number;// 编号
+	private Integer parent = 2;
 
 	@ManyToOne
 	@JoinColumn(name = "column_id")
@@ -50,5 +51,13 @@ public class Column extends BaseEntity {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+
+	public Integer getParent() {
+		return parent;
+	}
+
+	public void setParent(Integer parent) {
+		this.parent = parent;
 	}
 }

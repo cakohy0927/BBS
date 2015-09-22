@@ -17,17 +17,35 @@
 		if(confirm("你确定删除？")){
 			$.get("${ctx}/basic/topic/column/columnDelete/"+id,function(data){
 				data = jQuery.parseJSON(data);
-				if(data.resposeCode == '<%=MessageObject.ResponseCode.code_200%>'){
+				if(data.resposecode == '<%=MessageObject.ResponseCode.code_200%>'){
 					alert(data.message);
 					window.location.href = '${ctx}/basic/topic/column/columnList';
 				} else {
 					alert(data.message);
 					return ;
 				}
-					
 			});
 		}
 	}
+
+    function editDisplay(id,display){
+        var msg = "你确定启用？"
+        if(display == 'NONE'){
+            msg = "你确定停用？"
+        }
+        if(confirm(msg)){
+            $.get("${ctx}/basic/topic/column/editDisplay/"+id+"/" + display,function(data){
+                data = jQuery.parseJSON(data);
+                if(data.resposecode == '<%=MessageObject.ResponseCode.code_200%>'){
+                    alert(data.message);
+                    window.location.href = '${ctx}/basic/topic/column/columnList';
+                } else {
+                    alert(data.message);
+                    return ;
+                }
+            });
+        }
+    }
 </script>
 <title>栏目列表</title>
 </head>
@@ -83,9 +101,15 @@
                                         <c:when test="${column.displayStatus == 'NONE'}">不显示</c:when>
                                     </c:choose>
                                 </td>
-                                <td style="text-align: center;width:100px;">
+                                <td style="text-align: center;width:130px;">
                                     <a href="${ctx}/basic/topic/column/columnEdit/${column.id}">修改</a>
                                     <a href="javascript:void(0)" onclick="deleteInfo('${column.id}')">删除</a>
+                                    <c:if test="${column.displayStatus == 'NONE'}">
+                                        <a href="javascript:void(0)" onclick="editDisplay('${column.id}','DISPLAY')">启用</a>
+                                    </c:if>
+                                    <c:if test="${column.displayStatus == 'DISPLAY'}">
+                                        <a href="javascript:void(0)" onclick="editDisplay('${column.id}','NONE')">停用</a>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
