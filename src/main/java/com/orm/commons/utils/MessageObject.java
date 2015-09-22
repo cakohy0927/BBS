@@ -40,10 +40,12 @@ public class MessageObject {
 
 	public void setErrorMessage(String errorMessage) {
 		this.message = errorMessage;
+		this.resposecode = ResponseCode.code_404;
 	}
 
 	public void setInforMessage(String inforMessage) {
 		this.message = inforMessage;
+		this.resposecode = ResponseCode.code_200;
 	}
 
 	public void setResposecode(Integer resposecode) {

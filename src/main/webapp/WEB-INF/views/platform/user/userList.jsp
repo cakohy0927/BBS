@@ -1,4 +1,3 @@
-<%@page import="com.orm.enums.SysEnum"%>
 <%@page import="com.orm.commons.utils.MessageObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,11 +15,11 @@
 	function deleteInfo(id,departId){
 		//${ctx}/platform/depart/delete
 		if(confirm("你确定删除？")){
-			$.get("${ctx}/platform/depart/delete/"+id,function(data){
+			$.get("${ctx}/platform/user/userDelete/"+id,function(data){
 				data = jQuery.parseJSON(data);
-				if(data.resposeCode == '<%=MessageObject.ResponseCode.code_200%>'){
+				if(data.resposecode == '<%=MessageObject.ResponseCode.code_200%>'){
 					alert(data.message);
-					window.location.href = '${ctx}/platform/depart/departChildList?id='+departId;
+					window.location.href = '${ctx}/platform/user/userList';
 				} else {
 					alert(data.message);
 					return ;
@@ -84,9 +83,10 @@
 										<c:when test="${user.userStatus == 'NORMAL'}">账户可用</c:when>
 									</c:choose>
 								</td>
-								<td style="text-align: center;width:100px;">
+								<td style="text-align: center;width:140px;">
 									<a href="${ctx}/platform/user/userEdit/${user.id}">修改</a>
 									<a href="javascript:void(0)" onclick="deleteInfo('${entity.id}','${depart.id}')">删除</a>
+									<a href="${ctx}/platform/user/userAddRoles/${user.id}">添加角色</a>
 								</td>
 							</tr>
 						</c:forEach>

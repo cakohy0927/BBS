@@ -16,7 +16,7 @@
                 tiptype:2,
                 datatype:{
                     "*3-20": /^[^\s]{3,20}$/,
-                    "z2-4" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
+                    "z2-20" : /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,20}$/,
                     "loginName":function(value){
                         var usern = /^[a-zA-Z0-9_]{1,}$/;
                         if(!usern.test(value)){
@@ -55,7 +55,7 @@
                 <label for="nickName" class="col-sm-2 control-label">用户昵称</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" name="nickName" id="nickName" placeholder="请输入用户昵称"
-                           datatype="*3-20" nullmsg="请输入用户昵称！" errormsg="昵称至少3个字符,最多20个字符！">
+                           datatype="z2-20" nullmsg="请输入用户昵称！" errormsg="昵称至少3个字符,最多20个字符！">
                 </div>
                 <div class="Validform_checktip"></div>
             </div>

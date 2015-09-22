@@ -1,8 +1,17 @@
 package com.cako.platform.user.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.cako.platform.role.entity.Role;
 import com.cako.platform.utils.BaseEntity;
 import com.orm.enums.SysEnum;
 import com.orm.enums.SysEnum.Status;
@@ -17,7 +26,9 @@ public class User extends BaseEntity {
 	private String loginName;// 登录名称
 	private String nickName;// 用户昵称
 	private String password;// 登录密码
+	private List<Role> roles = new ArrayList<Role>();
 	private SysEnum.Status userStatus = Status.INIT;// 用户状态
+
 	private SysEnum.UserType userType = UserType.GENERAL;// 用户类型
 
 	public String getBrithday() {
@@ -38,6 +49,12 @@ public class User extends BaseEntity {
 
 	public String getPassword() {
 		return password;
+	}
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "t_platform_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	public List<Role> getRoles() {
+		return roles;
 	}
 
 	public SysEnum.Status getUserStatus() {
@@ -68,6 +85,10 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
 	public void setUserStatus(SysEnum.Status userStatus) {
 		this.userStatus = userStatus;
 	}
@@ -75,5 +96,4 @@ public class User extends BaseEntity {
 	public void setUserType(SysEnum.UserType userType) {
 		this.userType = userType;
 	}
-
 }

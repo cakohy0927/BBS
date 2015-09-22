@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cako.platform.role.entity.Role;
+import com.cako.platform.role.service.RoleService;
 import com.cako.platform.user.entity.User;
 import com.cako.platform.user.service.UserService;
 import com.cako.platform.user.tree.UserClazz;
@@ -26,13 +28,37 @@ import com.orm.commons.exception.ServiceException;
 import com.orm.commons.utils.ObjectTools;
 import com.orm.commons.utils.Pager;
 import com.orm.enums.SysEnum;
+import com.orm.enums.SysEnum.DeleteStatus;
 
 @Controller
 @RequestMapping(value = "/platform")
 public class UserController {
 
 	@Autowired
+	private RoleService roleService;
+
+	@Autowired
 	private UserService userService;
+
+	@RequestMapping(value = "/user/userAddRoles/{userId}", method = { RequestMethod.POST, RequestMethod.GET })
+	public String roleList(@PathVariable("userId") String userId, HttpServletRequest request, Model model) {
+		String currentPage = request.getParameter("currentPage");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("deleteStatus_eq", DeleteStatus.NO);
+		try {
+			if (StringUtils.isNotEmpty(userId)) {
+				User user = userService.get(userId);
+				model.addAttribute("user", user);
+			}
+			ObjectTools<Role> tools = roleService.queryPageByMap(map, currentPage, new Sort(Sort.Direction.DESC, "createTime"));
+			model.addAttribute("rolesList", tools.getEntities());
+			model.addAttribute("tools", tools);
+			model.addAttribute("currentPage", currentPage);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return "platform/user/userAddRole";
+	}
 
 	@RequestMapping(value = "/user/userCreate")
 	public String userCreate(HttpServletRequest request, Model model) {

@@ -1,9 +1,9 @@
 package com.cako.platform.role.entity;
 
-import com.cako.platform.utils.BaseEntity;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.cako.platform.utils.BaseEntity;
 
 /**
  * Created by Curtain on 2015/9/21.
@@ -11,22 +11,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_platform_role")
 public class Role extends BaseEntity {
-    private String name;
-    private String roleCode;
+	private String code;
+	private String name;
 
-    public String getRoleCode() {
-        return roleCode;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 }
