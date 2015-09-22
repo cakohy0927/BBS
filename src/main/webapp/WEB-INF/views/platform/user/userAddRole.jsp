@@ -14,11 +14,14 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#chkAll").click(function () {//反选  
-			if(this.checked){    
-		        $("#queryForm :checkbox").prop("checked", "checked");   
-		    }else{    
-		        $("#queryForm :checkbox").prop("checked", false); 
-		    }  
+			var chkOnes = document.getElementsByName('chkOne');
+			for(var i = 0; i < chkOnes.length ; i ++){
+				if(chkOnes[i].checked){
+					chkOnes[i].removeAttribute("checked")
+				}else {
+					chkOnes[i].setAttribute("checked",true)
+				}
+			}
         });  
 		
 		$("#getValue").click(function(){ 
@@ -27,20 +30,31 @@
 		        valArr[i] = $(this).val(); 
 		    }); 
 		    var vals = valArr.join(',');//转换为逗号隔开的字符串 
-		    alert(vals); 
+		   	$("#roleIds").val(vals);
+			$.ajax({
+				type:'POST',
+				dataType:'json',
+				url:'${ctx}/platform/user/userAddRole?id=${user.id}',
+				cache:false,
+				data:$("#addForm").serialize(),
+				success: function (data) {
+					console.log(data);
+				}
+			})
 		}); 
 	});
 </script>
 </head>
 <body>
 	<div class="container-fluid">
-		<form class="form-horizontal" style="height:40px;" method="post" action="${ctx}/platform/user/userSave">
+		<form class="form-horizontal" id="addForm" style="height:40px;">
 			<div class="row btn-operate" style="height:40px;line-height:40px;">
 	            <div class="query-toolbar">
 	                <span>当前用户：</span><span>${user.nickName}</span>
+					<input type="hidden" value="" name="roleIds" id="roleIds"/>
 	            </div>
 	            <div class="operate-toolbar">
-	                <a class="btn btn-primary btn-sm" href="javasript:void(0)" id="getValue">添加</a>
+	                <a class="btn btn-primary btn-sm" href="javascript:void(0)" id="getValue">添加</a>
 	            </div>
 	        </div>
 		</form>
