@@ -65,7 +65,7 @@
 							<tr>
 								<td>${attachment.name}</td>
 								<td>${attachment.size}</td>
-								<td>${attachment.type}</td>
+								<td>${attachment.fileType}</td>
 								<td>${attachment.suffix}</td>
 								<td>${attachment.path}</td>
 								<td>

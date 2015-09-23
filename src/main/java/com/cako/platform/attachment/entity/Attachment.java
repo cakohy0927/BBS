@@ -3,7 +3,7 @@ package com.cako.platform.attachment.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.orm.commons.utils.IdEntity;
+import com.cako.platform.utils.BaseEntity;
 
 /**
  * 附件的大小
@@ -13,7 +13,7 @@ import com.orm.commons.utils.IdEntity;
  */
 @Entity
 @Table(name = "t_platform_attachment")
-public class Attachment extends IdEntity {
+public class Attachment extends BaseEntity {
 
 	/**
 	 * 附件的名称
@@ -27,41 +27,29 @@ public class Attachment extends IdEntity {
 	/**
 	 * 附件的类型
 	 */
-	private String type;
-
-	/**
-	 * 附件的图标
-	 */
-	private String icon;
+	private String fileType;
 
 	/**
 	 * 附件的大小
 	 */
-	private String size;
-	
+	private String fileSize;
+
 	/**
 	 * 文件后缀名
 	 */
 	private String suffix;
-	
-	public Attachment(){
-		
+
+	public Attachment() {
+
 	}
-	
-	public Attachment(String name, String path, String type, String size,String suffix) {
+
+	public Attachment(String name, String path, String type, String fileSize, String suffix) {
 		super();
 		this.name = name;
 		this.path = path;
-		this.type = type;
-		this.size = size;
+		this.fileType = type;
+		this.fileSize = fileSize;
 		this.suffix = suffix;
-	}
-	public Attachment(String name, String path, String type, String size) {
-		super();
-		this.name = name;
-		this.path = path;
-		this.type = type;
-		this.size = size;
 	}
 
 	public String getName() {
@@ -80,30 +68,22 @@ public class Attachment extends IdEntity {
 		this.path = path;
 	}
 
-	public String getType() {
-		return type;
+	public String getFileType() {
+		return fileType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 
-	public String getIcon() {
-		return icon;
+	public String getFileSize() {
+		return fileSize;
 	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
+	
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
 	}
-
-	public String getSize() {
-		return size;
-	}
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
+	
 	public String getSuffix() {
 		return suffix;
 	}
@@ -111,6 +91,5 @@ public class Attachment extends IdEntity {
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
 	}
-	
-	
+
 }

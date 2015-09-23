@@ -1,22 +1,21 @@
 package com.cako.platform.attachment.service.impl;
 
-import com.cako.platform.attachment.dao.AttachmentDao;
-import com.cako.platform.attachment.entity.Attachment;
-import com.cako.platform.attachment.service.AttachmentService;
-import com.orm.commons.service.impl.DefaulfAbstractService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cako.platform.attachment.dao.AttachmentDao;
+import com.cako.platform.attachment.entity.Attachment;
+import com.cako.platform.attachment.service.AttachmentService;
+import com.orm.commons.service.impl.DefaulfAbstractService;
+
+@Service
 @Transactional(readOnly = false)
-public class VersionServiceImpl extends DefaulfAbstractService<Attachment,String> implements AttachmentService {
+public class AttachmentServiceImpl extends DefaulfAbstractService<Attachment,String> implements AttachmentService {
 
 	@Autowired
 	private AttachmentDao attachmentDao;

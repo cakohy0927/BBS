@@ -1,14 +1,18 @@
-package com.cako.platform.attachment.controller;
+package com.cako.platform.attachment.api;
 
-import com.cako.platform.attachment.entity.Attachment;
-import com.cako.platform.attachment.service.AttachmentService;
-import com.orm.commons.exception.ServiceException;
-import com.orm.commons.utils.FileTools;
-import com.orm.commons.utils.JsonMapper;
-import com.orm.commons.utils.MessageObject;
-import com.orm.commons.utils.ObjectTools;
-import net.sf.jmimemagic.Magic;
-import net.sf.jmimemagic.MagicMatch;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.activation.MimetypesFileTypeMap;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
+import com.cako.platform.attachment.entity.Attachment;
+import com.cako.platform.attachment.service.AttachmentService;
+import com.orm.commons.exception.ServiceException;
+import com.orm.commons.utils.FileTools;
+import com.orm.commons.utils.JsonMapper;
+import com.orm.commons.utils.MessageObject;
+import com.orm.commons.utils.ObjectTools;
 
 @Controller
 @RequestMapping(value = "/platform")
@@ -100,8 +104,7 @@ public class AttachmentController {
                 for (String filePath : values) {
                     File file = new File(filePath);
                     FileInputStream fin = new FileInputStream(file);
-                    MagicMatch match = Magic.getMagicMatch(file, false, true);
-                    String contentType = match.getMimeType();
+                    String contentType = new MimetypesFileTypeMap().getContentType(file);
                     long files = FileTools.getFileSizes(file);
                     String fileSize = FileTools.formetFileSize(files);//文件的大小
                     String suffix = FileTools.getFileExtension(file.getName());//文件的后缀
