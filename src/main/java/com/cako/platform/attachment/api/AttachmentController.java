@@ -91,7 +91,7 @@ public class AttachmentController {
     }
 
 
-    @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+    @RequestMapping(value = "/attachment/fileUpload", method = RequestMethod.POST)
     public void fileUpload(HttpServletRequest request, HttpServletResponse response) {
         String realPath = request.getSession().getServletContext().getRealPath("/upload");
         if (!new File(realPath).exists()) {

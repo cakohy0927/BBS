@@ -12,9 +12,6 @@
 	#file-table{
 		margin-top:25px;
 	}
-	#file-list>td{
-		width:6%;
-	}
 	.bar {
 	    height: 22px;
 	    margin-top: 35px;
@@ -56,9 +53,10 @@
 				var obj2 = eval(json);
 				for(var i = 0;i < obj2.length;i++){
 					num ++ ;
+					console.log(obj2);
 					content += "<tr id='"+num+"'><td>"
 						+"<input type='hidden' name='myfiles' value='"+obj2[i].path+"'>"
-						+obj2[i].name+"</td><td>"+obj2[i].size+"</td><td>"+obj2[i].suffix+"</td><td><a href=\"javascript:deleteTr('"+num+"')\">删除</a></td></tr>"
+						+obj2[i].name+"</td><td>"+obj2[i].fileSize+"</td><td>"+obj2[i].fifileSize</td><td>"+obj2[i].suffix+"</td><td><a href=\"javascript:deleteTr('"+num+"')\">删除</a></td></tr>"
 				}
 				$("#file-list").after(content);
 				$('.progress').css('display','none');
@@ -76,6 +74,7 @@
     function deleteTr(id){
         $("#"+id).remove();
     }
+    
     function fileUploadFile(){
 	    mask();
     	$.ajax({
@@ -97,9 +96,8 @@
   			}
 		});
     }
-    
     function mask(){
-		var mask_div = "<div class=\"mask\" id=\"mask_div\" style=\"z-index: 9006;width:"+window.outerWidth+"px;height:"+document.body.offsetHeight+"px;position: absolute;display: block;\"></div>";
+		var mask_div = "<div class=\"mask container-fluid\" id=\"mask_div\" style=\"z-index: 9006;width:"+window.outerWidth+"px;height:"+document.body.offsetHeight+"px;position: absolute;display: block;\"></div>";
 		$('.container-fluid').append(mask_div);
 		var mask_msg = "<div style=\"z-index:9008;background:#FFFFFF;position: absolute;display: block;width:auto;height:126px;top:"+(document.body.offsetHeight / 2 - 100)+"px;left:"+(document.body.offsetWidth / 2 - 200)+"px;\">"
 			+"<img src=\"${ctx}/static/project/images/5663276531418682069.jpg\">"
@@ -130,7 +128,7 @@
 		</div>
 		<div>
 			<table id="file-table" class="table table-striped table-bordered table-hover" style="display:none">
-				<tr id="file-list"><td>文件名</td><td>文件大小</td><td>文件类型</td><td>操作</td></tr>
+				<tr id="file-list"><td>文件名</td><td>文件大小</td><td>文件类型</td><td>文件后缀</td><td>操作</td></tr>
 			</table>
 		</div>
 	</form>

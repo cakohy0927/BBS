@@ -44,7 +44,7 @@
 	            </div>
 	            <div class="operate-toolbar">
 	                <a class="btn btn-info btn-sm" href="javascript:void(0)">查询</a>
-	                <a class="btn btn-primary btn-sm" href="${ctx}/platform/menu/menuCreate">添加</a>
+	                <a class="btn btn-primary btn-sm" href="${ctx}/platform/attachment/create">添加</a>
 	            </div>
 	        </div>
 			<div class="row">
@@ -64,7 +64,7 @@
 						<c:forEach var="attachment" items="${attachmentList}">
 							<tr>
 								<td>${attachment.name}</td>
-								<td>${attachment.size}</td>
+								<td>${attachment.fileSize}</td>
 								<td>${attachment.fileType}</td>
 								<td>${attachment.suffix}</td>
 								<td>${attachment.path}</td>
@@ -74,7 +74,7 @@
                                         <c:when test="${attachment.displayStatus == 'NONE'}">不显示</c:when>
                                     </c:choose>
                                 </td>
-								<td style="text-align: center;width:100px;">
+								<td style="text-align: center;width:130px;">
 									<a href="${ctx}/platform/user/userEdit/${user.id}">修改</a>
 									<a href="${ctx}/platform/user/userEdit/${user.id}">预览</a>
 									<a href="javascript:void(0)" onclick="deleteInfo('${entity.id}','${depart.id}')">删除</a>
@@ -84,7 +84,7 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="6" style="text-align: right;">
+							<td colspan="8" style="text-align: right;">
 								<page:pageInfo pageInfo="${tools.pager}" formId="queryForm" currentPage="${currentPage}"/>
 							</td>
 						</tr>
