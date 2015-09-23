@@ -1,5 +1,7 @@
 package com.orm.commons.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class MessageObject {
 
 	public static interface ResponseCode {
@@ -21,7 +23,16 @@ public class MessageObject {
 
 	private String message;
 
+	private Object object;
 	private Integer resposecode;
+
+	public Object getObject() {
+		return object;
+	}
+
+	public void setObject(Object object) {
+		this.object = object;
+	}
 
 	public String getJsonMapper(MessageObject message) {
 		if (message != null) {
@@ -46,6 +57,10 @@ public class MessageObject {
 	public void setInforMessage(String inforMessage) {
 		this.message = inforMessage;
 		this.resposecode = ResponseCode.code_200;
+		if (StringUtils.isEmpty(inforMessage)){
+			this.resposecode = null;
+		}
+
 	}
 
 	public void setResposecode(Integer resposecode) {

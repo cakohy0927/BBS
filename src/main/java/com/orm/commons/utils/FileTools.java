@@ -103,11 +103,10 @@ public class FileTools {
 	/**
 	 * 获取文件扩展名
 	 * 
-	 * @param file
+	 * @param fileName
 	 * @return
 	 */
-	public static String getFileExtension(File file) {
-		String fileName = file.getName();
+	public static String getFileExtension(String fileName) {
 		if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
 			return fileName.substring(fileName.lastIndexOf(".") + 1);
 		} else {

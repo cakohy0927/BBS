@@ -89,6 +89,7 @@
 					<p class="menu_head">基础数据管理</p>
 					<div style="display:none;" class=menu_body >
 						<a href="${ctx}/basic/topic/column/columnList" target="main_frame">栏目信息管理</a>
+						<a href="${ctx}/platform/attachment/attachmentList" target="main_frame">附件信息管理</a>
 					</div>
 					<p class="menu_head">法学</p>
 					<div style="display:none" class=menu_body >
