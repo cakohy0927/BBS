@@ -43,27 +43,26 @@
 		var uploader = $("#fileupload-file");
 		var num = '1';
 		$('#fileupload').fileupload({
-			autoUpload : true,//是否自动上传  
+			autoUpload : true,//是否自动上传
 			url: '${ctx}/platform/attachment/copy',//上传地址
 			dataType : 'json',
-			done : function(e,data) {//设置文件上传完毕事件的回调函数  
+			done : function(e,data) {//设置文件上传完毕事件的回调函数
 				var content = "";
 				$("#file-table").css("display","block");
 				var json = JSON.stringify(data.result);
 				var obj2 = eval(json);
 				for(var i = 0;i < obj2.length;i++){
 					num ++ ;
-					console.log(obj2);
 					content += "<tr id='"+num+"'><td>"
 						+"<input type='hidden' name='myfiles' value='"+obj2[i].path+"'>"
-						+obj2[i].name+"</td><td>"+obj2[i].fileSize+"</td><td>"+obj2[i].fifileSize</td><td>"+obj2[i].suffix+"</td><td><a href=\"javascript:deleteTr('"+num+"')\">删除</a></td></tr>"
+						+obj2[i].name+"</td><td>"+obj2[i].fileSize+"</td><td>"+obj2[i].fileType+"</td><td>"+obj2[i].suffix+"</td><td><a href=\"javascript:deleteTr('"+num+"')\">删除</a></td></tr>"
 				}
 				$("#file-list").after(content);
 				$('.progress').css('display','none');
 				$('.progress-bar').css('width','0%');
 			},
-			progressall : function(e, data) {//设置上传进度事件的回调函数  
-				$('.progress').css('display','block');	
+			progressall : function(e, data) {//设置上传进度事件的回调函数
+				$('.progress').css('display','block');
 				var progress = parseInt(data.loaded / data.total * 60, 17);
 				$('.progress-bar').css('width', progress + '%');
 			}
@@ -74,7 +73,7 @@
     function deleteTr(id){
         $("#"+id).remove();
     }
-    
+
     function fileUploadFile(){
 	    mask();
     	$.ajax({
@@ -104,7 +103,7 @@
 		+"</div>"
 		$("#mask_div").html(mask_msg);
 	}
-	
+
 	function hiddenMask(){
 		$("#mask_div").remove();
 	}
@@ -112,13 +111,13 @@
 <div class="container-fluid row">
 	<form id="fileupload-file">
 		<div class="">
-			<span class="btn btn-success fileinput-button"> 
-				<i class="glyphicon glyphicon-plus"></i> 
-				<span>选择文件</span> 
+			<span class="btn btn-success fileinput-button">
+				<i class="glyphicon glyphicon-plus"></i>
+				<span>选择文件</span>
 				<input id="fileupload" name="files[]" multiple="" type="file">
 			</span>
 			<button type="button" onclick="fileUploadFile()" id="btn-upload" class="btn btn-primary start">
-				<i class="glyphicon glyphicon-upload"></i> 
+				<i class="glyphicon glyphicon-upload"></i>
 				<span>开始上传</span>
 			</button>
 		</div>

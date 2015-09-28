@@ -18,4 +18,10 @@ public class InnerController {
 		System.out.println("这是后台主页");
 		return "inner/index";
 	}
+
+	@RequestMapping(value = {"/loginPage",""})
+	public String loginPage(HttpServletRequest request){
+
+		return "login";
+	}
 }

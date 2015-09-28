@@ -29,10 +29,78 @@
 			});
 		}
 	}
+
+	$(document).ready(function () {
+		$(".show-div").css('display','none');
+	});
+
+	function getView(id){
+		// 获得iframe里面的内容
+		var content = window.parent.document.getElementById('main_frame').contentWindow;
+		// console.log(content);
+		// 获得iframe的高度
+		console.log(content.document.body.scrollHeight);
+		$(".show-div").css({
+			'left':document.body.offsetWidth / 6
+		});
+		$.get('${ctx}/platform/attachment/findOne/'+id, function (data) {
+			data = jQuery.parseJSON(data)
+			var attachment = data.object;
+			var content = "";
+			$(".show-div").show();
+			if(data.resposecode == 200){
+				content = "<img width='400px' height='auto' src=\"${ctx}/"+attachment.path+"\">";
+			} else {
+				content = data.message;
+			}
+			$(".view").html(content);
+
+		});
+	}
+
+	function imageClose(){
+		$(".show-div").hide();
+	}
 </script>
+	<style type="text/css">
+		.show-div {
+			position: absolute;
+			z-index: 9999;
+			width: 414px;
+			height: auto;
+			border-radius:5px;
+			background: #f5e79e;
+		}
+		.show-div .show-img {
+			width: auto;
+			z-index:9008;
+			position: relative;
+			display: block;
+			width:auto;
+		}
+		.show-img img {
+			width: 400px;
+		}
+
+		.view {
+			margin-left: 7px;
+			margin-right: 7px;
+			margin-bottom: 7px;
+		}
+
+		#toolbar {
+			margin-right:7px;
+		}
+	</style>
 <title>菜单列表</title>
 </head>
 <body>
+	<div class="show-div">
+		<div style='float:right' id="toolbar">
+			<a href='javascript:void(0)' onclick='imageClose()' id='close-div'>关闭</a>
+		</div>
+		<div class="view"></div>
+	</div>
 	<div class="container-fluid">
 		<form action="" method="get" name="queryForm" id="queryForm">
 			 <div class="row btn-operate" style="">
@@ -75,8 +143,8 @@
                                     </c:choose>
                                 </td>
 								<td style="text-align: center;width:130px;">
+									<a href="javascript:void(0)" onclick="getView('${attachment.id}')">预览</a>
 									<a href="${ctx}/platform/user/userEdit/${user.id}">修改</a>
-									<a href="${ctx}/platform/user/userEdit/${user.id}">预览</a>
 									<a href="javascript:void(0)" onclick="deleteInfo('${entity.id}','${depart.id}')">删除</a>
 								</td>
 							</tr>

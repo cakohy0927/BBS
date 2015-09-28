@@ -3,11 +3,7 @@ package com.cako.platform.attachment.api;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -43,6 +36,8 @@ public class AttachmentController {
 
     private MessageObject message = new MessageObject();
 
+    private static String tempDir = "";
+
     @RequestMapping(value = "/attachment/create")
     public String create(HttpServletRequest request, Model model) {
 
@@ -52,15 +47,9 @@ public class AttachmentController {
     @RequestMapping(value = "/attachment/copy", method = RequestMethod.POST)
     @ResponseBody
     public String copy(@RequestParam MultipartFile[] myfiles, MultipartHttpServletRequest request, HttpServletResponse response) {
-        String activiti = request.getParameter("activiti");
-        String realPath = "";
-        if (StringUtils.isNotEmpty(activiti)) {
-            realPath = request.getSession().getServletContext().getRealPath("/upload") + File.separatorChar + activiti;
-        } else {
-            realPath = request.getSession().getServletContext().getRealPath("/upload/temp");
-        }
-        if (!new File(realPath).exists()) {
-            new File(realPath).mkdirs();
+        tempDir = request.getSession().getServletContext().getRealPath("/upload/temp");
+        if (!new File(tempDir).exists()) {
+            new File(tempDir).mkdirs();
         }
 
         Iterator<String> iterator = request.getFileNames();
@@ -78,10 +67,10 @@ public class AttachmentController {
             } else {
                 fileSize = size + "KB";
             }
-            String path = realPath + File.separatorChar + name;
+            String path = tempDir + File.separatorChar + name;
             Attachment version = new Attachment(name, new File(path).getPath(), type, fileSize, FileTools.getFileExtension(name));
             try {
-                FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), new File(realPath, multipartFile.getOriginalFilename()));
+                FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), new File(tempDir, multipartFile.getOriginalFilename()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,7 +82,7 @@ public class AttachmentController {
 
     @RequestMapping(value = "/attachment/fileUpload", method = RequestMethod.POST)
     public void fileUpload(HttpServletRequest request, HttpServletResponse response) {
-        String realPath = request.getSession().getServletContext().getRealPath("/upload");
+        String realPath = request.getSession().getServletContext().getRealPath("/upload/attachment");
         if (!new File(realPath).exists()) {
             new File(realPath).mkdirs();
         }
@@ -110,9 +99,10 @@ public class AttachmentController {
                     String suffix = FileTools.getFileExtension(file.getName());//文件的后缀
                     String name = file.getName();
                     name = name.substring(0, name.lastIndexOf("."));
-                    Attachment attachment = new Attachment(name, "/upload/" + file.getName(), contentType, fileSize, suffix);
+                    String filename = UUID.randomUUID().toString().replaceAll("-", "") + "." + suffix;
+                    FileUtils.copyInputStreamToFile(fin, new File(realPath, filename));
+                    Attachment attachment = new Attachment(name, "/upload/attachment/" + filename, contentType, fileSize, suffix);
                     attachment = attachmentService.save(attachment);
-                    FileUtils.copyInputStreamToFile(fin, new File(realPath, file.getName()));
                     versionIds += attachment.getId() + ",";
                 }
                 if (StringUtils.isNotEmpty(versionIds)) {
@@ -120,10 +110,11 @@ public class AttachmentController {
                 }
                 message.setObject(versionIds);
                 message.setInforMessage("上传成功");
+                FileTools.delFolder(tempDir);
             } else {
                 message.setErrorMessage("请先选择文件，再上传");
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             message.setErrorMessage("上传文件失败");
         } finally {
@@ -148,5 +139,31 @@ public class AttachmentController {
             e.printStackTrace();
         }
         return "platform/attachment/attachmentList";
+    }
+
+    @RequestMapping(value = "/attachment/findOne/{id}", method = RequestMethod.GET)
+    public void findOne(@PathVariable("id") String id, HttpServletResponse response) {
+        try {
+            if (StringUtils.isNotEmpty(id)) {
+                Attachment attachment = attachmentService.get(id);
+                if (attachment != null){
+                    message.setObject(attachment);
+                    message.setInforMessage("查询数据成功");
+                }else {
+                    message.setErrorMessage("没有查询到该附件");
+                }
+            }else {
+                message.setErrorMessage("没有查询到该附件");
+            }
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            message.setErrorMessage("没有查询到该附件");
+        } finally {
+            try {
+                response.getWriter().write(message.getJsonMapper(message));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
