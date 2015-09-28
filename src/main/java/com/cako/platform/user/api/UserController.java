@@ -8,8 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cako.platform.utils.BaseController;
-import com.orm.commons.utils.JsonMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -24,6 +22,7 @@ import com.cako.platform.role.service.RoleService;
 import com.cako.platform.user.entity.User;
 import com.cako.platform.user.service.UserService;
 import com.cako.platform.user.tree.UserClazz;
+import com.cako.platform.utils.BaseController;
 import com.cako.platform.utils.BeanToMapUtil;
 import com.orm.commons.encryption.MD5Encryption;
 import com.orm.commons.exception.ServiceException;

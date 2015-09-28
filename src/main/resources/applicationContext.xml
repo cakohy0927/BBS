@@ -18,8 +18,15 @@
 		<property name="indexUrl" value="/index" />
 		<property name="loginUrl" value="/login" />
 	</bean>
- 	<!-- task任务扫描注解 -->  
-    <task:annotation-driven/>  
+ 	<!-- task任务扫描注解 -->
+	<task:executor id="executor" pool-size="5" />
+	<task:scheduler id="scheduler" pool-size="10" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />  
+    
+    <!-- <bean id="replyNoteServiceImpl" class="com.cako.basic.tribune.reply.service.impl.ReplyNoteServiceImpl" />
+    <task:scheduled-tasks>
+        <task:scheduled ref="replyNoteServiceImpl" method="myTask" cron="0 5 * * * ?"/>
+    </task:scheduled-tasks> -->
 
     <bean id="springContextHolder" class="com.orm.commons.spring.SpringContextHolder" lazy-init="false"/>
     <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
