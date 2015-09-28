@@ -10,7 +10,11 @@
     <title></title>
     <script type="text/javascript">
         $(function () {
-
+			
+        	$(".submit").click(function(){
+        		$("#loginForm").submit();
+        	});
+        	
             var height = window.innerHeight;
             $(".main").css({
                 'margin-top':height/2 - 100
@@ -54,7 +58,7 @@
 </head>
 <body>
     <div style="position: relative">
-        <form action="" method="post">
+        <form action="${ctx}/login" method="post" id="loginForm">
             <div class="main">
                 <div style="width: 165px; height: 96px; position: absolute;">
                     <div class="tou"></div>
@@ -76,7 +80,7 @@
                         </span>
                        <span style="float: right;">
                            <a class="reg" href="#">注册</a>
-                           <a class="submit" href="#">登录</a>
+                           <a class="submit" href="javascript:void(0)">登录</a>
                        </span>
                     </p>
                 </div>

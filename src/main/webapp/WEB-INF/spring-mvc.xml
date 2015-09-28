@@ -63,4 +63,10 @@
 			</props>
 		</property>
 	</bean>
+	
+	<mvc:interceptors>
+        <bean class="com.orm.config.CommonInterceptor"></bean>
+	</mvc:interceptors>
+	
+	<mvc:resources location="/static/" mapping="/static/**"/>
 </beans>

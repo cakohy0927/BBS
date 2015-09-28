@@ -1,11 +1,16 @@
 package com.orm.login;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+
+import com.cako.platform.user.entity.User;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Created by Curtain on 2015/9/26.
@@ -15,6 +20,29 @@ public class SingleLogin implements HttpSessionListener {
     // 保存sessionID和username的映射
     private static Map<String,Object> hUserName = new HashMap<String,Object>();
 
+    /**
+     * @描述：获得一个用户对象
+     * @author HUANGYUAN
+     * @TIME:2015年9月28日 下午12:24:10
+     * @param session
+     * @return
+     */
+    public static User getUser(HttpSession session){
+    	return (User) session.getAttribute(session.getId());
+    }
+    
+    /**
+     * @描述：存入一个用户对象
+     * @author HUANGYUAN
+     * @TIME:2015年9月28日 下午12:24:29
+     * @param request
+     * @param loginName
+     */
+    public static void setUser(HttpServletRequest request,User user){
+    	HttpSession session = request.getSession();
+    	session.setAttribute(session.getId(), user);
+    }
+    
     /** 以下是实现HttpSessionListener中的方法* */
     @Override
     public void sessionCreated(HttpSessionEvent se) {
@@ -39,22 +67,22 @@ public class SingleLogin implements HttpSessionListener {
         if (hUserName.containsValue(sUserName)) {
             flag = true;
             // 遍历原来的hUserName，删除原用户名对应的sessionID(即删除原来的sessionID和username)
-            Iterator iter = hUserName.entrySet().iterator();
+            Iterator<Entry<String, Object>> iter = hUserName.entrySet().iterator();
             while (iter.hasNext()) {
-                Map.Entry entry = (Map.Entry) iter.next();
+                Map.Entry<String,Object> entry = iter.next();
                 Object key = entry.getKey();
                 Object val = entry.getValue();
-                if (((String) val).equals(sUserName)) {
+                if (sUserName.equals(val)) {
                     hUserName.remove(key);
                 }
             }
             // 添加现在的sessionID和username
             hUserName.put(session.getId(), sUserName);
-            System.out.println("hUserName   =   " + hUserName);
+            System.out.println("hUserName = " + hUserName);
         } else {// 如果该用户没登录过，直接添加现在的sessionID和username
             flag = false;
             hUserName.put(session.getId(), sUserName);
-            System.out.println("hUserName   =   " + hUserName);
+            System.out.println("hUserName = " + hUserName);
         }
         return flag;
     }

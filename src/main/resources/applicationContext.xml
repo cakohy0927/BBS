@@ -14,10 +14,6 @@
 
 
     <description>Spring公共配置</description>
-	<bean id="pageConfig" class="com.orm.config.PageConfig">
-		<property name="indexUrl" value="/index" />
-		<property name="loginUrl" value="/login" />
-	</bean>
  	<!-- task任务扫描注解 -->
 	<task:executor id="executor" pool-size="5" />
 	<task:scheduler id="scheduler" pool-size="10" />
@@ -96,6 +92,11 @@
 	    <property name="cmsIndex" value="${cmsIndex}"/>
 	    <property name="initPassword" value="${initPassword}"/>
 	    <property name="initUsername" value="${initUsername}"/>
+	</bean>
+	
+	<bean id="pageConfig" class="com.orm.config.PageConfig" init-method="init" lazy-init="false">
+		<property name="indexUrl" value="/index" />
+		<property name="loginUrl" value="/WEB-INF/view/login" />
 	</bean>
 	
     <!-- development 环境 -->
