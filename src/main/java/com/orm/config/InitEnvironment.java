@@ -20,6 +20,7 @@ public class InitEnvironment {
 
 	private String cmsIndex;// 前台首页
 	private String errorPage;// 前台错误页面
+	private String ignoreOutLinkAddress;// 外部链接
 	private String ignoreResources;// 需要忽略的文件或者路径
 	private String initPassword;
 
@@ -33,6 +34,10 @@ public class InitEnvironment {
 
 	public String getErrorPage() {
 		return errorPage;
+	}
+
+	public String getIgnoreOutLinkAddress() {
+		return ignoreOutLinkAddress;
 	}
 
 	public String getIgnoreResources() {
@@ -66,6 +71,10 @@ public class InitEnvironment {
 		this.errorPage = errorPage;
 	}
 
+	public void setIgnoreOutLinkAddress(String ignoreOutLinkAddress) {
+		this.ignoreOutLinkAddress = ignoreOutLinkAddress;
+	}
+
 	public void setIgnoreResources(String ignoreResources) {
 		this.ignoreResources = ignoreResources;
 	}
@@ -88,4 +97,5 @@ public class InitEnvironment {
 				+ ", errorPage=" + errorPage + ", cmsIndex=" + cmsIndex + ", initUsername=" + initUsername + ", initPassword="
 				+ initPassword + "]";
 	}
+
 }

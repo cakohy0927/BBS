@@ -1,11 +1,11 @@
 package com.cako.basic.index;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
-import com.cako.basic.topic.column.entity.Column;
-import com.cako.basic.topic.column.service.ColumnService;
-import com.orm.commons.exception.ServiceException;
-import com.orm.enums.SysEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -13,9 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.cako.basic.topic.column.entity.Column;
+import com.cako.basic.topic.column.service.ColumnService;
+import com.orm.commons.exception.ServiceException;
+import com.orm.enums.SysEnum;
 
 @Controller
 public class IndexCcontroller {
@@ -23,7 +24,7 @@ public class IndexCcontroller {
 	@Autowired
 	private ColumnService columnService;
 
-	@RequestMapping(value = "/outerPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/outLink/outerPage", method = RequestMethod.GET)
 	public String outerPage(HttpServletRequest request, Model model) {
 		Map<String,Object> paramsMap = new HashMap<String, Object>();
 		try {
