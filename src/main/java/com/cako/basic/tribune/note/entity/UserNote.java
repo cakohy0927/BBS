@@ -20,6 +20,7 @@ import com.cako.platform.utils.BaseEntity;
 public class UserNote extends BaseEntity {
 	private Column column;// 帖子所属的模块
 	private String noteContent;// 帖子的内容
+	private String noteNumber;// 帖子编号
 	private String noteTitle;// 帖子的标题
 	private User user;// 写帖子的人,版主
 
@@ -32,6 +33,10 @@ public class UserNote extends BaseEntity {
 	@Lob
 	public String getNoteContent() {
 		return noteContent;
+	}
+
+	public String getNoteNumber() {
+		return noteNumber;
 	}
 
 	public String getNoteTitle() {
@@ -52,6 +57,10 @@ public class UserNote extends BaseEntity {
 		this.noteContent = noteContent;
 	}
 
+	public void setNoteNumber(String noteNumber) {
+		this.noteNumber = noteNumber;
+	}
+
 	public void setNoteTitle(String noteTitle) {
 		this.noteTitle = noteTitle;
 	}
@@ -59,5 +68,4 @@ public class UserNote extends BaseEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 }

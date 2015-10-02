@@ -92,20 +92,6 @@
             background: #49A3FF;
             color: #FFF
         }
-        .content a {
-            color: #000000;
-        }
-        .mouse-div {
-            display: none;
-            z-index: 9999;
-            position: absolute;
-            width: 200px;
-            height: auto;
-        }
-        .mouse-div img {
-            width: 200px;
-            height: auto;
-        }
     </style>
     <script type="text/javascript">
         var timeout = 500;
@@ -143,7 +129,7 @@
         document.onclick = mclose;
 
         $(document).ready(function(){
-            $(".content a").each(function () {
+            /* $(".content a").each(function () {
                 $(this).bind('mouseover',function (event) {
                     var x = event.pageX;
                     var y = event.pageY;
@@ -153,15 +139,12 @@
                         'display':'block'
                     });
                 });
-            });
+            }); */
         });
     </script>
 </head>
 <body>
 <div class="container">
-    <div class="mouse-div">
-        <img src="http://www.huabian.com/uploadfile/2014/0716/20140716101245199.jpg" />
-    </div>
     <div class="row" style="background-color:#15a230">
         <span class="menu">
             <ul id="sddm">
@@ -183,16 +166,14 @@
             </ul>
         </span>
         <span class="logincss">
-            当前访客身份：游客
+                            当前访客身份：游客
             <a href="javascript:void(0)">[ 登录</a>
             |
             <a href="javascript:void(0)">加入落幕 ]</a>
         </span>
     </div>
     <div class="row">
-        <div class="col-md-8">
-
-        </div>
+        <div class="col-md-8"></div>
         <div class="col-md-4">
             <form id="queryForm" name="queryForm">
                 <div class="row" style="margin-top:5px;margin-bottom:5px;">
@@ -212,17 +193,7 @@
         </div>
     </div>
     <div class="row content">
-        <a href="#">图片一</a><br>
-        <a href="#">图片二</a><br>
-        <a href="#">图片三</a><br>
-        <a href="#">图片四</a><br>
-        <a href="#">图片五</a><br>
-        <a href="#">图片六</a><br>
-        <a href="#">图片七</a><br>
-        <a href="#">图片八</a><br>
-        <a href="#">图片九</a><br>
-        <a href="#">图片十</a><br>
-        <a href="#">图片十一</a><br>
+        
     </div>
 </div>
 </body>
