@@ -1,3 +1,4 @@
+<%@ page import="com.orm.commons.utils.MessageObject" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set value="${pageContext.request.contextPath}" var="ctx"></c:set>
@@ -34,11 +35,18 @@
 			$.ajax({
 				type:'POST',
 				dataType:'json',
-				url:'${ctx}/platform/user/userAddRole?id=${user.id}',
+				url:'${ctx}/platform/user/addRole/${user.id}',
 				cache:false,
 				data:$("#addForm").serialize(),
 				success: function (data) {
 					console.log(data);
+					if(data.resposecode == '<%=MessageObject.ResponseCode.code_200%>'){
+						alert(data.message);
+                        window.location.href = "${ctx}/platform/user/userList"
+					} else {
+						alert(data.message);
+						return;
+					}
 				}
 			})
 		}); 

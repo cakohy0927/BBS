@@ -1,5 +1,6 @@
 package com.cako.platform.user.api;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,8 @@ import com.orm.enums.SysEnum.DeleteStatus;
 @Controller
 @RequestMapping(value = "/platform")
 public class UserController extends BaseController {
+
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private RoleService roleService;
@@ -101,8 +106,8 @@ public class UserController extends BaseController {
         return "platform/user/userList";
     }
 
-    @RequestMapping(value = "/user/userAddRole", method = RequestMethod.POST)
-    public String userAddRole(HttpServletRequest request) {
+    @RequestMapping(value = "/user/addRole/{id}", method = RequestMethod.POST)
+    public void addRole(@PathVariable("id") String id, HttpServletRequest request,HttpServletResponse response) {
         try {
             String roleIds = request.getParameter("roleIds");
             List<Role> roles = new ArrayList<Role>();
@@ -115,7 +120,6 @@ public class UserController extends BaseController {
                     }
                 }
             }
-            String id = request.getParameter("id");
             if (StringUtils.isNotEmpty(id)) {
                 User user = userService.get(id);
                 if (user != null){
@@ -131,8 +135,15 @@ public class UserController extends BaseController {
         }catch (ServiceException e){
             e.printStackTrace();
             message.setInforMessage("添加角色失败");
+        }finally {
+            try {
+                response.getWriter().write(message.getJsonMapper(message));
+            } catch (IOException e) {
+                logger.info(e.getMessage());
+                e.printStackTrace();
+            }
         }
-        return message.getJsonMapper(message);
+
     }
 
     @RequestMapping(value = "/user/userSave", method = RequestMethod.POST)
