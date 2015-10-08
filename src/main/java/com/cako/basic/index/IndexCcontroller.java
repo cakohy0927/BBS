@@ -1,6 +1,5 @@
 package com.cako.basic.index;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cako.basic.topic.column.entity.Column;
 import com.cako.basic.topic.column.service.ColumnService;
 import com.orm.commons.exception.ServiceException;
-import com.orm.commons.utils.MyConfig;
 import com.orm.enums.SysEnum;
 
 @Controller
@@ -45,16 +43,8 @@ public class IndexCcontroller {
 			}
 			model.addAttribute("childernMap",childernMap);
 			model.addAttribute("columns",columns);
-			HashMap<String, Object> hashMap = MyConfig.getConfig();
-			Object object = hashMap.get("upload");
-			File file = new File(object.toString());
-			file.setWritable(true, true);
-			file.setReadable(true, true);
-			if (!file.exists()) {
-				file.mkdirs();
-			}
-			logger.info("文件目录为：" + file.getAbsolutePath());
 		} catch (ServiceException e) {
+			logger.info(e.getMessage());
 			e.printStackTrace();
 		}
 		return "outerPage";
