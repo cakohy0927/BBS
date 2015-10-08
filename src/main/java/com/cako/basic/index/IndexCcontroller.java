@@ -46,7 +46,7 @@ public class IndexCcontroller {
 			model.addAttribute("childernMap",childernMap);
 			model.addAttribute("columns",columns);
 			HashMap<String, Object> hashMap = MyConfig.getConfig();
-			Object object = hashMap.get("fileUpload");
+			Object object = hashMap.get("upload");
 			System.out.println(object != null ? object.toString() : object);
 			File file = new File(object.toString());
 			if (!file.exists()) {
