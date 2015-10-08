@@ -47,8 +47,9 @@ public class IndexCcontroller {
 			model.addAttribute("columns",columns);
 			HashMap<String, Object> hashMap = MyConfig.getConfig();
 			Object object = hashMap.get("upload");
-			System.out.println(object != null ? object.toString() : object);
 			File file = new File(object.toString());
+			file.setWritable(true, true);
+			file.setReadable(true, true);
 			if (!file.exists()) {
 				file.mkdirs();
 			}

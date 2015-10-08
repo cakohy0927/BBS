@@ -1,6 +1,8 @@
 package com.orm.commons.utils;
 
+import java.io.File;
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -30,6 +32,16 @@ public class ServletLister implements ServletContextListener {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		HashMap<String, Object> hashMap = MyConfig.getConfig();
+		Object object = hashMap.get("upload");
+		System.out.println(object != null ? object.toString() : object);
+		File file = new File(object.toString());
+		file.setWritable(true, true);
+		file.setReadable(true, true);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		logger.info("文件目录为：" + file.getAbsolutePath());
 		// ServletContext config = servletContext.getServletContext();
 		// String rootPath = config.getRealPath("/");
 		// logger.info("目录为：" + System.getProperty("user.dir"));

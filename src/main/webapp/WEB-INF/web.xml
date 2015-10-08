@@ -52,11 +52,10 @@
 		<param-value>
             classpath*:applicationContext.xml
         </param-value>
-        
 	</context-param>
 	<context-param>
 		<param-name>upload</param-name>
-		<param-value>/home/file/tempt</param-value>
+		<param-value>/home/curtain/upload/tempt</param-value>
 	</context-param>
 	<listener>
 		<listener-class>com.orm.commons.utils.ServletLister</listener-class>
