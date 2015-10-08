@@ -49,4 +49,9 @@ public class IndexCcontroller {
 		}
 		return "outerPage";
 	}
+	
+	@RequestMapping(value = "/outLink/test", method = RequestMethod.GET)
+	public String test(){
+		return "inner/childern";
+	}
 }
