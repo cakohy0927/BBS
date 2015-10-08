@@ -20,7 +20,7 @@ public class ServletLister implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent servletContext) {
 		logger.info("ServletLister容器正在装载");
 		try {
-			MyConfig config = new MyConfig();// 存放配置信息，用Map实现
+			MyConfig config = MyConfig.getInstance();// 存放配置信息，用Map实现
 			Enumeration<String> parameters = servletContext.getServletContext().getInitParameterNames();
 			while (parameters.hasMoreElements()) {
 				String name = parameters.nextElement();

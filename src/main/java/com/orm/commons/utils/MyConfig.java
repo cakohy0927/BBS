@@ -26,6 +26,9 @@ public class MyConfig {
 		MyConfig.config = config;
 	}
 
+	private MyConfig() {
+	}
+
 	public HashMap<String, Object> addKeyTValue(String name, String value) {
 		MyConfig.config.put(name, value);
 		return MyConfig.config;

@@ -55,8 +55,8 @@
         
 	</context-param>
 	<context-param>
-		<param-name>fileUpload</param-name>
-		<param-value>/test-file/fileUpload</param-value>
+		<param-name>upload</param-name>
+		<param-value>/home/file/tempt</param-value>
 	</context-param>
 	<listener>
 		<listener-class>com.orm.commons.utils.ServletLister</listener-class>
