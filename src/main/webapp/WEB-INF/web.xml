@@ -52,8 +52,15 @@
 		<param-value>
             classpath*:applicationContext.xml
         </param-value>
+        
 	</context-param>
-
+	<context-param>
+		<param-name>fileUpload</param-name>
+		<param-value>/test-file/fileUpload</param-value>
+	</context-param>
+	<listener>
+		<listener-class>com.orm.commons.utils.ServletLister</listener-class>
+	</listener>
 	<!-- 設定Spring Context的默认Profile -->
 	<context-param>
 		<param-name>spring.profiles.default</param-name>
