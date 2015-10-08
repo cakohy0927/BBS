@@ -92,6 +92,7 @@
 	    <property name="cmsIndex" value="${cmsIndex}"/>
 	    <property name="initPassword" value="${initPassword}"/>
 	    <property name="initUsername" value="${initUsername}"/>
+	    <property name="ignoreOutLinkAddress" value="${ignoreOutLinkAddress}"/>
 	</bean>
 	
 	<bean id="pageConfig" class="com.orm.config.PageConfig" init-method="init" lazy-init="false">

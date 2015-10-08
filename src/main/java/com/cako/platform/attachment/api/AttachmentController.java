@@ -25,6 +25,7 @@ import com.orm.commons.exception.ServiceException;
 import com.orm.commons.utils.FileTools;
 import com.orm.commons.utils.JsonMapper;
 import com.orm.commons.utils.MessageObject;
+import com.orm.commons.utils.MyConfig;
 import com.orm.commons.utils.ObjectTools;
 
 @Controller
@@ -48,6 +49,11 @@ public class AttachmentController {
     @ResponseBody
     public String copy(@RequestParam MultipartFile[] myfiles, MultipartHttpServletRequest request, HttpServletResponse response) {
         tempDir = request.getSession().getServletContext().getRealPath("/upload/temp");
+        HashMap<String, Object> hashMap = MyConfig.getConfig();
+		Object object = hashMap.get("upload");
+		if (object != null) {
+			tempDir = object.toString();
+		}
         if (!new File(tempDir).exists()) {
             new File(tempDir).mkdirs();
         }

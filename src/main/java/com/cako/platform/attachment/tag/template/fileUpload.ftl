@@ -6,9 +6,6 @@
 <script type="text/javascript" src="${ctx}/static/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery-file-upload/js/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery-file-upload/js/jquery.fileupload.js"></script><style type="text/css">
-	.container{
-		margin-top:50px;
-	}
 	#file-table{
 		margin-top:25px;
 	}
@@ -127,7 +124,7 @@
 		</div>
 		<div>
 			<table id="file-table" class="table table-striped table-bordered table-hover" style="display:none">
-				<tr id="file-list"><td>文件名</td><td>文件大小</td><td>文件类型</td><td>文件后缀</td><td>操作</td></tr>
+				<tr id="file-list"><td style="width:60%">文件名</td><td style="width:15%">文件大小</td><td style="width:15%">文件类型</td><td style="width:10%">文件后缀</td><td style="width:7%">操作</td></tr>
 			</table>
 		</div>
 	</form>

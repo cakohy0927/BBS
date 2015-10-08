@@ -86,8 +86,8 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-6">
-                    <button type="submit" class="btn btn-primary">注册</button>
-                    <button type="reset" class="btn btn-default">返回</button>
+                    <button type="submit" class="btn btn-primary">修改</button>
+                    <a href="javascript:history.go(-1)" class="btn btn-default">返回</a>
                 </div>
             </div>
         </form>
