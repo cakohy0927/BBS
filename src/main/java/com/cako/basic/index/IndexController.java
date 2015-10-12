@@ -50,8 +50,8 @@ public class IndexController {
 		return "outerPage";
 	}
 	
-	@RequestMapping(value = "/outLink/test", method = RequestMethod.GET)
-	public String test(){
+	@RequestMapping(value = "/outLink/index", method = RequestMethod.GET)
+	public String test(HttpServletRequest request, Model model){
 		return "inner/childern";
 	}
 }
