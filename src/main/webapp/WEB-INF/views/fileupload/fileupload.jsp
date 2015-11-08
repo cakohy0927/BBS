@@ -6,11 +6,17 @@
     <title></title>
     <script type="text/javascript" src="${ctx}/static/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="${ctx}/static/jquery/fileupload.js"></script>
+    <link rel="stylesheet" href="${ctx}/static/jquery/fileupload.css" type="text/css">
     <script type="text/javascript">
         $(document).ready(function () {
             $("#selectfile").fileupload({
-                fileId: 'test',
-                url: '${ctx}/outLink/upload'
+                fileId: 'attachment',
+                url: '${ctx}/outLink/upload',
+                fileMaxSize : '5120',
+                multipart : true,
+                success: function (data) {
+                    console.log(data)
+                }
             });
         });
     </script>
@@ -18,5 +24,6 @@
 <body>
 <input value="选择文件" type="button" id="selectfile" name="selectfile"/>
 <input value="上传文件" type="button" id="startfile" name="startfile"/>
+<input type="file" name="attachment" multiple="" style="display: none" id="attachment">
 </body>
 </html>
