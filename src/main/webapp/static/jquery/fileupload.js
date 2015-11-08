@@ -68,7 +68,7 @@ var frameId = "uploadIframe";
                 settings.error(result);
             }
             settings.success(result);
-            $("#showText").text("上传完成...");
+            $("#showText").text("上传完成.");
             $("#showClose").css('display','block');
         });
     }
