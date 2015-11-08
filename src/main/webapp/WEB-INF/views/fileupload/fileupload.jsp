@@ -13,7 +13,8 @@
                 fileId: 'attachment',
                 url: '${ctx}/outLink/upload',
                 fileMaxSize : '5120',
-                multipart : true,
+                startBtn : 'startfile',
+                autoupload :true,
                 success: function (data) {
                     console.log(data)
                 }
@@ -24,6 +25,6 @@
 <body>
 <input value="选择文件" type="button" id="selectfile" name="selectfile"/>
 <input value="上传文件" type="button" id="startfile" name="startfile"/>
-<input type="file" name="attachment" multiple="" style="display: none" id="attachment">
+<input type="file" name="attachment" style="display: none" id="attachment">
 </body>
 </html>

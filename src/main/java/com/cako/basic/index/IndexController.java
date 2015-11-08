@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -140,7 +141,9 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/outLink/upload", method = RequestMethod.POST)
-    public void upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+    public void upload(@RequestParam MultipartFile[] attachment, MultipartHttpServletRequest request, HttpServletResponse response) {
+
+        System.out.println(attachment.length);
         Iterator<String> iterator = request.getFileNames();
         MessageObject message = new MessageObject();
         while (iterator.hasNext()) {
@@ -148,6 +151,7 @@ public class IndexController {
             String type = multipartFile.getContentType();
             String name = multipartFile.getOriginalFilename();
             float size = (float) (multipartFile.getSize() / (1024));
+            System.out.println("文件名称 ： " + name);
             message.setInforMessage("上传成功");
         }
         try {

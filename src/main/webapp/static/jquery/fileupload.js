@@ -34,17 +34,18 @@ var frameId = "uploadIframe";
         // 文件文本框的改变事件
         $("#" + settings.fileId).change(function () {
             var fileVal = $("#" + settings.fileId).val();
-            alert(fileVal);
-            var file = $("#" + fileId);
-            console.log(file);
-            showdiv();
-            if(settings.autoupload) {
+            var old = $("#" + settings.fileId);
+            var newElement = old.clone();
+            newElement.attr("id", fileId);
+            $(newElement).appendTo($("#" + formId));
+            if (settings.autoupload) {
+                showdiv();
                 document.getElementById(formId).setAttribute("action", settings.url); //FORM提交到这个页面
                 document.getElementById(formId).submit();
             }
-
             // 开始上传
             $('#' + settings.startBtn).click(function () {
+                showdiv();
                 document.getElementById(formId).setAttribute("action", settings.url); //FORM提交到这个页面
                 document.getElementById(formId).submit();
             });
@@ -68,21 +69,32 @@ var frameId = "uploadIframe";
                 settings.error(result);
             }
             settings.success(result);
-            $("#showText").text("上传完成.");
-            $("#showClose").css('display','block');
+            var state = null;
+            if (document.readyState) {
+                try {
+                    state = $(this).document.readyState;
+                } catch (e) {
+                    state = null;
+                }
+                if (state == "complete" || !state) {
+                    console.log('加载完成....');
+                    $("#showText").text("上传完成.");
+                    $("#showClose").css('display', 'block');
+                    return;
+                }
+            }
         });
     }
 })(jQuery);
 
 /*创建form表单*/
 function _create_form(fileId, formId, oldElement, settings) {
-    var input = "<input type='file' style='display:none' name='" + oldElement.attr("name") + "[]' id='" + fileId + "'/>";
+   /* var input = "<input type='file' style='display:none' name='" + oldElement.attr("name") + "[]' id='" + fileId + "'/>";
     if (settings.multipart) {
         $(input).attr("multiple", "multiple");
-    }
+    }*/
     var form = "<form style='display:none' enctype='multipart/form-data' name='" + formId + "' id='" + formId + "' method=\"post\" "
         + "target='" + frameId + "' onsubmit='return false;'>"
-        + input
         + "</form>";
     return form;
 }
@@ -92,14 +104,14 @@ function _create_dom(fileId, formId, oldElement, settings) {
     var form = _create_form(fileId, formId, oldElement, settings);
     var iframe = _create_iframe();
     var show = '<div id="show">'
-        + '<div style="height:20px;;width:100%;display: block;background: #2a74ea;border-bottom: 8px solid #2a74ea;color: white;font-weight:bold">'
+        + '<div class="dialog-title">'
         + '提示信息'
-        + '<a id="showClose" href="javascript:hidediv()" style="color: #FFFFFF;float: right;display: none">关闭</a>'
+        + '<a id="showClose" href="javascript:hidediv()" class="dialog-close">关闭</a>'
         + '</div>'
-        + '<div id="showText" style="width:100%;height:120px;;line-height: 120px;text-align: center">'
+        + '<div id="showText" class="dialog-content">'
         + '正在上传，请稍等...'
-        +'</div>'
-        +'</div>';
+        + '</div>'
+        + '</div>';
     var bg = '<div id="bg"></div>';
     $("body").append(iframe).append(form).append(bg).append(show);
 }
